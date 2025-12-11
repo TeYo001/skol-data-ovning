@@ -1,0 +1,7 @@
+#ClearAllMemory
+
+#SetMemory 20=DF
+#SetMemory 21=10
+#SetMemory 22=02
+
+#SetMemory FF=20

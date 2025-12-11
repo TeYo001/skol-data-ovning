@@ -1,0 +1,4 @@
+#SetRegister A=10
+#ClearAllMemory
+#SetMemory 20=08
+#SetMemory FF=20
