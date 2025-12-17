@@ -1,0 +1,36 @@
+LED: 	EQU $FB
+
+
+	ORG $20
+start:
+	LDSP $20 ; Load 0x20 into SP
+	JSR main ; Call main
+	JMP start ; Restart program
+main:
+	ANDCC #0 ; Zero-set CC
+	LDA #1 ; A = 1
+main_1:
+	STA LED ; M(LED) = A
+	LSLA ; A = A << 1
+	ADCA #0 ; A = A + Carry
+	JSR Delay ; Call Delay
+	JMP main_1 ; Continue
+	
+Delay:
+	; Save
+	PSHA
+	PSHC
+	LDA #$FF ; A = 255
+Delay_1:
+	; while (A != 0) A--;
+	DECA
+	TSTA
+	BNE Delay_1
+	; Restore
+	PULC
+	PULA
+	RTS ; Return
+
+	; Put start on OxFF 
+	ORG $FF
+	FCB start
